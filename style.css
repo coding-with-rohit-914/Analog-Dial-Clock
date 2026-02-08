@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@300;400;500;600;700&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Replace the background in style.css */
+body,
+html {
+    /* background: #000000; */
+    background-image:
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.8)),
+        url('bg.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    height: 100vh;
+    color: #fff;
+    font-family: 'Times New Roman', serif;
+    overflow: hidden;
+}
+
+/* Background Animation */
+.background-animation {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    animation: float 15s infinite linear;
+}
+
+.square {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.03);
+    animation: slide 20s infinite linear;
+}
+
+.triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent transparent rgba(255, 255, 255, 0.04) transparent;
+    animation: pop 12s infinite ease-in-out;
+}
+
+/* Circle positions and sizes */
+.circle-1 {
+    width: 100px;
+    height: 100px;
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.circle-2 {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 10%;
+    animation-delay: 2s;
+    animation-duration: 18s;
+}
+
+.circle-3 {
+    width: 80px;
+    height: 80px;
+    bottom: 20%;
+    left: 15%;
+    animation-delay: 4s;
+    animation-duration: 22s;
+}
+
+.circle-4 {
+    width: 120px;
+    height: 120px;
+    top: 20%;
+    right: 20%;
+    animation-delay: 6s;
+    animation-duration: 16s;
+}
+
+.circle-5 {
+    width: 90px;
+    height: 90px;
+    bottom: 40%;
+    left: 70%;
+    animation-delay: 8s;
+    animation-duration: 20s;
+}
+
+/* Square positions and sizes */
+.square-1 {
+    width: 80px;
+    height: 80px;
+    top: 30%;
+    left: 60%;
+    animation-delay: 1s;
+}
+
+.square-2 {
+    width: 60px;
+    height: 60px;
+    bottom: 30%;
+    right: 30%;
+    animation-delay: 3s;
+    animation-duration: 18s;
+}
+
+/* Triangle positions */
+.triangle-1 {
+    border-width: 0 50px 86.6px 50px;
+    top: 15%;
+    left: 80%;
+    animation-delay: 0s;
+}
+
+.triangle-2 {
+    border-width: 0 40px 69.3px 40px;
+    bottom: 15%;
+    right: 70%;
+    animation-delay: 2s;
+    animation-duration: 15s;
+}
+
+/* Animation keyframes */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.05;
+    }
+
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+        opacity: 0.1;
+    }
+
+    50% {
+        transform: translateY(0) rotate(180deg);
+        opacity: 0.05;
+    }
+
+    75% {
+        transform: translateY(20px) rotate(270deg);
+        opacity: 0.1;
+    }
+}
+
+@keyframes slide {
+
+    0%,
+    100% {
+        transform: translateX(0) rotate(0deg);
+        opacity: 0.03;
+    }
+
+    25% {
+        transform: translateX(30px) rotate(45deg);
+        opacity: 0.06;
+    }
+
+    50% {
+        transform: translateX(0) rotate(90deg);
+        opacity: 0.03;
+    }
+
+    75% {
+        transform: translateX(-30px) rotate(135deg);
+        opacity: 0.06;
+    }
+}
+
+@keyframes pop {
+
+    0%,
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 0.04;
+    }
+
+    50% {
+        transform: scale(1.3) translateY(-20px);
+        opacity: 0.08;
+    }
+}
+
+/* Clock Styles */
+.clock {
+    --clock-size: 360px;
+    width: var(--clock-size);
+    height: var(--clock-size);
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.spike {
+    position: absolute;
+    width: 8px;
+    height: 1px;
+    background: #fff9;
+    line-height: 20px;
+    transform-origin: 50%;
+    z-index: 5;
+    inset: 0;
+    margin: auto;
+    font-style: normal;
+    transform: rotate(var(--rotate)) translateX(var(--dail-size));
+}
+
+.spike:nth-child(5n + 1) {
+    box-shadow: -7px 0 #fff9;
+}
+
+.spike:nth-child(5n + 1)::after {
+    content: attr(data-i);
+    position: absolute;
+    right: 22px;
+    top: -10px;
+    transition: 1s linear;
+    transform: rotate(calc(var(--dRotate) - var(--rotate)));
+    font-family: 'Times New Roman', serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.seconds {
+    --dRotate: 0deg;
+    --dail-size: calc((var(--clock-size)/ 2) - 8px);
+    font-weight: 800;
+    font-size: 18px;
+    transform: rotate(calc(-1 * var(--dRotate)));
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    transition: 1s linear;
+}
+
+.minutes {
+    --dail-size: calc((var(--clock-size)/ 2) - 65px);
+    font-size: 16px;
+    transform: rotate(calc(-1 * var(--dRotate)));
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    transition: 1s linear;
+}
+
+.stop-anim {
+    transition: 0s linear;
+}
+
+.stop-anim .spike::after {
+    transition: 0s linear !important;
+}
+
+/* Hour Container with Day Section */
+.hour-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 15;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 80px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    animation: pulse-glow 3s infinite ease-in-out;
+}
+
+.hour {
+    font-size: 70px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 5px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Day Section Styles */
+.day-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    animation: slide-up 0.5s ease-out;
+}
+
+.day-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.day-date {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    opacity: 0.9;
+}
+
+.minute {
+    font-size: 36px;
+    font-weight: 900;
+    position: absolute;
+    background: #000;
+    z-index: 20;
+    right: calc(var(--clock-size)/ 4.5);
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 5px 10px;
+    border-radius: 60px;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+    animation: slide-in-right 0.8s ease-out;
+}
+
+.minute::after {
+    content: '';
+    position: absolute;
+    border: 2px solid #fff;
+    border-right: none;
+    height: 50px;
+    left: -10px;
+    top: 50%;
+    border-radius: 40px 0 0 40px;
+    width: calc(var(--clock-size)/ 2.75);
+    transform: translatey(-50%);
+}
+
+/* Additional Animations */
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) translateX(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+/* Center dot for clock */
+.clock::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    left: 178px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+}
